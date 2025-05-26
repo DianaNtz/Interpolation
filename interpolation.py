@@ -63,3 +63,26 @@ plt.ylim(np.min(f(z)),np.max(f(z))+0.5)
 plt.legend(loc=2,fontsize=19,handlelength=3)
 plt.savefig("interpolation.png",dpi=120)
 plt.show()
+
+#2D Interpolation
+def L(x0,x):
+     Lx=np.zeros(len(x))
+     ka=np.where(np.abs(x-x0)<=0.000001)
+     if(ka[0].size>0):
+        Lx[ka]=1
+        return Lx
+
+     wx=omega(x)
+     C1x=np.sum(wx/(x0-x))
+     C2x=wx/(x0-x)
+     Lx=C2x/C1x
+     return Lx
+
+def  interpolation2D(x0,y0,x,y,f):
+
+     Lx=L(x0,x)
+     Ly=L(y0,y)
+     C=0
+     L0=np.kron(Lx,Ly)
+     C=np.dot(L0,f)
+     return C
