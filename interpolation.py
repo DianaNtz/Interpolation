@@ -86,3 +86,27 @@ def  interpolation2D(x0,y0,x,y,f):
      L0=np.kron(Lx,Ly)
      C=np.dot(L0,f)
      return C
+#create grid
+Nx=60
+Ny=30
+xmin=0
+xmax=1
+ymin=0
+ymax=np.pi
+
+x=grid(xmin,xmax,Nx)
+y=grid(ymin,ymax,Ny)
+#create 2D test function
+def fx(x):
+    return np.exp(-x**2)
+def fy(y):
+    return np.exp(-(y-0.5)**2)
+
+fxx=fx(x)
+fyy=fy(y)
+f=np.kron(fxx,fyy) #f[i+j*Ny] j x, i y
+
+x0,y0=0.5,0.6
+#compare interpolated with analytical result
+print(interpolation2D(x0,y0,x,y,f))
+print(fx(x0)*fy(y0))
