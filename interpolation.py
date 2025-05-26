@@ -49,3 +49,17 @@ def p(z,fzz):
              C2=C2+w[j]/(z[i]-zz[j])*fzz[j]
        result[i]=C2/C1
     return result
+#interpolate test function into new grid
+z=np.linspace(zmin,zmax,2*N)
+
+ax1 = plt.subplots(1, sharex=True, figsize=(10,6))
+plt.plot(z,f(z),"-",label="f(z)")
+plt.plot(z,p(z,fzz),"o",label="p(z)")
+plt.xlabel("z",fontsize=18)
+plt.yticks(fontsize= 17)
+plt.xticks(fontsize= 17)
+plt.xlim(zmin,zmax)
+plt.ylim(np.min(f(z)),np.max(f(z))+0.5)
+plt.legend(loc=2,fontsize=19,handlelength=3)
+plt.savefig("interpolation.png",dpi=120)
+plt.show()
